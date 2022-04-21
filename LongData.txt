@@ -1,0 +1,308 @@
+#list of libraries: 
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(ggpubr)
+
+
+#Loads data for all subjects as needed
+
+#subjectnum = 'S00006'
+
+subject <- function(subjectnum) {
+  
+#command to import all the data into a cv3 file: 
+L_B <- read.delim(file.path("A:/Star_Repeatability_c3d",subjectnum,"00001/Final/Results/L_B.txt"), header=FALSE )
+L_C <- read.delim(file.path("A:/Star_Repeatability_c3d",subjectnum,"00001/Final/Results/L_C.txt"), header=FALSE)
+L_D <- read.delim(file.path("A:/Star_Repeatability_c3d",subjectnum,"00001/Final/Results/L_D.txt"), header=FALSE)
+L_E <- read.delim(file.path("A:/Star_Repeatability_c3d",subjectnum,"00001/Final/Results/L_E.txt"), header=FALSE)
+R_A <- read.delim(file.path("A:/Star_Repeatability_c3d",subjectnum,"00001/Final/Results/R_A.txt"), header=FALSE)
+R_B <- read.delim(file.path("A:/Star_Repeatability_c3d",subjectnum,"00001/Final/Results/R_B.txt"), header=FALSE)
+R_C <- read.delim(file.path("A:/Star_Repeatability_c3d",subjectnum,"00001/Final/Results/R_C.txt"), header=FALSE)
+R_D <- read.delim(file.path("A:/Star_Repeatability_c3d",subjectnum,"00001/Final/Results/R_D.txt"), header=FALSE)
+R_E <- read.delim(file.path("A:/Star_Repeatability_c3d",subjectnum,"00001/Final/Results/R_E.txt"), header=FALSE)
+L_A <- read.delim(file.path("A:/Star_Repeatability_c3d",subjectnum,"00001/Final/Results/L_A.txt"), header=FALSE)
+
+#function that cleans the code up and places the code in columns
+
+  dataCleaner <- function(data_remove1) { 
+  
+  #Data cleaner
+  data_remove1<-data_remove1[-c(1,3,4),] 
+  old <-colnames(data_remove1)
+  new_names <- data_remove1[c(1),]
+  new_names[1,1] <- "ITEM"
+  new_names <-as.character(new_names)
+  coord_names <- data_remove1[c(2),]
+  coord_names <-as.character(coord_names)
+  newer_names <- paste(new_names, coord_names, sep='_')
+  library(data.table)
+  #install.packages("data.table")
+  setnames(data_remove1, old = old, new = newer_names)
+  data_remove1<-data_remove1[-c(1,2),] 
+  
+  
+  
+  return(data_remove1)
+  }
+
+#Functions to clean up all the exported data: 
+        L_A<-dataCleaner(L_A)
+        L_B<-dataCleaner(L_B)
+        L_C<-dataCleaner(L_C)
+        L_D<-dataCleaner(L_D)
+        L_E<-dataCleaner(L_E)
+        R_A<-dataCleaner(R_A)
+        R_B<-dataCleaner(R_B)
+        R_C<-dataCleaner(R_C)
+        R_D<-dataCleaner(R_D)
+        R_E<-dataCleaner(R_E)
+        
+
+        
+#code to identify the different angles for each column:
+
+Xcount <- 0
+Ycount<- 0
+Zcount<- 0
+Xcount2 <- 0
+Ycount2<- 0
+Zcount2<- 0
+Xcount3 <- 0
+Ycount3<- 0
+Zcount3<-0
+  
+i<-(1)
+
+ 
+ 
+#ORDER <- L_A 
+#print(ncol(ORDER))
+
+dataSort <- function (ORDER) {
+  while (i <= ncol(ORDER)) {
+    
+    
+    #KNEE RENAMING
+    if (colnames(ORDER)[i]=="LANKLE_ANGLE_X") {
+      Xcount<-Xcount+1
+      ans<-paste(as.character('LANKLE_ANGLE_X'),"sep",as.character(Xcount))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    if (colnames(ORDER)[i]=="LANKLE_ANGLE_Y") {
+      Ycount<-Ycount+1
+      ans<-paste(as.character('LANKLE_ANGLE_Y'),"sep",as.character(Ycount))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    if (colnames(ORDER)[i]=="LANKLE_ANGLE_Z") {
+      Zcount<-Zcount+1
+      ans<-paste(as.character('LANKLE_ANGLE_Z'),"sep",as.character(Zcount))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    
+    #HIP RENAMING
+    
+    if (colnames(ORDER)[i]=="LHIP_ANGLE_X") {
+      Xcount2<-Xcount2+1
+      ans<-paste(as.character('LHIP_ANGLE_X'),"sep",as.character(Xcount2))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    if (colnames(ORDER)[i]=="LHIP_ANGLE_Y") {
+      Ycount2<-Ycount2+1
+      ans<-paste(as.character('LHIP_ANGLE_Y'),"sep",as.character(Ycount2))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    if (colnames(ORDER)[i]=="LHIP_ANGLE_Z") {
+      Zcount2<-Zcount2+1
+      ans<-paste(as.character('LHIP_ANGLE_Z'),"sep",as.character(Zcount2))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    
+    
+    #KNEE RENAMING: 
+    
+    if (colnames(ORDER)[i]=="LKNEE_ANGLE_X") {
+      Xcount3<-Xcount3+1
+      ans<-paste(as.character('LKNEE_ANGLE_X'),"sep",as.character(Xcount3))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    if (colnames(ORDER)[i]=="LKNEE_ANGLE_Y") {
+      Ycount3<-Ycount3+1
+      ans<-paste(as.character('LKNEE_ANGLE_Y'),"sep",as.character(Ycount3))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    if (colnames(ORDER)[i]=="LKNEE_ANGLE_Z") {
+      Zcount3<-Zcount3+1
+      ans<-paste(as.character('LKNEE_ANGLE_Z'),"sep",as.character(Zcount3))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    
+    
+    #KNEE RENAMING
+    if (colnames(ORDER)[i]=="RANKLE_ANGLE_X") {
+      Xcount<-Xcount+1
+      ans<-paste(as.character('RANKLE_ANGLE_X'),"sep",as.character(Xcount))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    if (colnames(ORDER)[i]=="RANKLE_ANGLE_Y") {
+      Ycount<-Ycount+1
+      ans<-paste(as.character('RANKLE_ANGLE_Y'),"sep",as.character(Ycount))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    if (colnames(ORDER)[i]=="RANKLE_ANGLE_Z") {
+      Zcount<-Zcount+1
+      ans<-paste(as.character('RANKLE_ANGLE_Z'),"sep",as.character(Zcount))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    
+    #HIP RENAMING
+    
+    if (colnames(ORDER)[i]=="RHIP_ANGLE_X") {
+      Xcount2<-Xcount2+1
+      ans<-paste(as.character('RHIP_ANGLE_X'),"sep",as.character(Xcount2))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    if (colnames(ORDER)[i]=="RHIP_ANGLE_Y") {
+      Ycount2<-Ycount2+1
+      ans<-paste(as.character('RHIP_ANGLE_Y'),"sep",as.character(Ycount2))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    if (colnames(ORDER)[i]=="RHIP_ANGLE_Z") {
+      Zcount2<-Zcount2+1
+      ans<-paste(as.character('RHIP_ANGLE_Z'),"sep",as.character(Zcount2))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    
+    
+    #KNEE RENAMING: 
+    
+    if (colnames(ORDER)[i]=="RKNEE_ANGLE_X") {
+      Xcount3<-Xcount3+1
+      ans<-paste(as.character('RKNEE_ANGLE_X'),"sep",as.character(Xcount3))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    if (colnames(ORDER)[i]=="RKNEE_ANGLE_Y") {
+      Ycount3<-Ycount3+1
+      ans<-paste(as.character('RKNEE_ANGLE_Y'),"sep",as.character(Ycount3))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    if (colnames(ORDER)[i]=="RKNEE_ANGLE_Z") {
+      Zcount3<-Zcount3+1
+      ans<-paste(as.character('RKNEE_ANGLE_Z'),"sep",as.character(Zcount3))
+      colnames(ORDER)[i] <- (ans)
+    }
+    
+    
+    i<-i+1
+  
+  }
+  
+  return(ORDER)
+}
+
+
+
+#functions to sort: 
+  L_A<-dataSort(L_A)
+  L_B<-dataSort(L_B)
+  L_C<-dataSort(L_C)
+  L_D<-dataSort(L_D)
+  L_E<-dataSort(L_E)
+  R_A<-dataSort(R_A)
+  R_B<-dataSort(R_B)
+  R_C<-dataSort(R_C)
+  R_D<-dataSort(R_D)
+  R_E<-dataSort(R_E)
+  
+
+#Long data format function:
+  
+  
+event='A'  
+
+longformat<- function (longtest)  {
+   
+   longtest<-pivot_longer(longtest,!ITEM_ITEM, names_to = "Joint", values_to = "Value")
+   longtest <- separate(longtest, c(Joint), into=c("Joint", "Component"), sep="_ANGLE_")
+   longtest <- separate(longtest, c(Component), into=c("Component", "Count"), sep="sep")
+ 
+  longtest<-pivot_wider(longtest ,names_from = c(ITEM_ITEM), values_from=c(Value))
+ 
+  #Adds the event colum : 
+  longtest$Event<-event
+  longtest <- longtest %>% select(Event, everything())
+ 
+  return(longtest)    
+}
+
+
+#functions in long data: 
+  L_A<-longformat(L_A)
+  event='B'
+  L_B<-longformat(L_B)
+  event='C'
+  L_C<-longformat(L_C)
+  event='D'
+  L_D<-longformat(L_D)
+  event='E'
+  L_E<-longformat(L_E)
+  
+  event ='A'
+  R_A<-longformat(R_A)
+  event='B'
+  R_B<-longformat(R_B)
+  event='C'
+  R_C<-longformat(R_C)
+  event='D'
+  R_D<-longformat(R_D)
+  event='E'
+  R_E<-longformat(R_E)
+  
+  
+  mergeTest<- rbind(L_A, R_A,L_B,R_B,L_C,R_C,L_D,R_D,L_E,R_E)
+  mergeTest$Subject<- subjectnum
+  mergeTest <- mergeTest %>% select(Subject, everything())
+  
+  
+  return(mergeTest)
+}
+
+
+
+
+  # sub4<-subject('S00004')
+  # sub6<-subject('S00006')
+  # sub8<-subject('S00008')
+  # sub14<-subject('S00014')
+  # sub16 <-subject('S00016')
+  # sub18<-subject('S00018')
+  # sub19<-subject('S00019')
+  # sub20<-subject('S00020')
+  # sub26<-subject('S00026')
+  # sub27<-subject('S00027')
+  # sub33<-subject('S00033')
+
+  finalData <- rbind(subject('S00004'), subject('S00006'), subject('S00008'), subject('S00014'), subject('S00016'), subject('S00018'),subject('S00019'),  subject('S00020'), subject('S00026'), subject('S00027'), subject('S00033') )
+
+#gg plot stuff goes here: 
+#ggplot(data = finalData, mapping = aes(x=Count, y=1:101))
+
+  
+  

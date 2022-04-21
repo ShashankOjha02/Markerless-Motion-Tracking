@@ -1,0 +1,185 @@
+ 
+  
+  #------------------------------------------------------------------------------------------------------Code for Final Plots ------------------------------------------------------------------------------------------------------
+
+#graphing
+  
+# subGraph <- "S00033"
+# 
+# #Hip: 
+# 
+#               Hip_X <- finalData %>%
+#               filter (Subject %in% subGraph) %>%
+#               filter (Event %in% c("A", "B","C","D", "E"))%>%
+#               filter (Component %in% "X ")%>%
+#               filter (Joint %in% c("LHIP","RHIP")) %>%
+#               #filter(Count %in% c(" 1")) %>%
+#               pivot_longer(cols=c(6:106), names_to = "Cycle", values_to = "Value") %>%
+#               unite("Seperator", c(Event:Count), remove = FALSE ) #gives each cycle a unique identifier in the graph
+#             
+#             
+#             
+#             #graphing: 
+#               hx<-ggplot(Hip_X, aes(x=as.integer(Cycle), y=as.double(Value), color = Event, group=Seperator))  +
+#               geom_line()+
+#               guides(color =guide_legend(title="Event"))+
+#               ggtitle(paste(subGraph, "Hips_X"))
+#               hx
+#             
+#             Hip_Y <- finalData %>%
+#               
+#               filter (Subject %in% subGraph) %>%
+#               filter (Event %in% c("A","B","C","D","E"))%>%
+#               filter (Component %in% "Y ")%>%
+#               filter (Joint %in% c("LHIP","RHIP")) %>%
+#               #filter(Count %in% c(" 1")) %>%
+#               pivot_longer(cols=c(6:106), names_to = "Cycle", values_to = "Value") %>%
+#               unite("Seperator", c(Event:Count), remove = FALSE ) #gives each cycle a unique identifier in the graph
+#             
+#               #graphing
+#               hy<-ggplot(Hip_Y, aes(x=as.integer(Cycle), y=as.double(Value), color = Event, group=Seperator))  +
+#               geom_line()+
+#               guides(color =guide_legend(title="Event")) +
+#               ggtitle("Hips_Y")
+#               hy
+#               
+#             Hip_Z <- finalData %>%
+#               filter (Subject %in% subGraph) %>%
+#               filter (Event %in% c("A","B","C","D","E"))%>%
+#               filter (Component %in% "Z ")%>%
+#               filter (Joint %in% c("LHIP","RHIP")) %>%
+#               #filter(Count %in% c(" 1")) %>%
+#               pivot_longer(cols=c(6:106), names_to = "Cycle", values_to = "Value") %>%
+#               unite("Seperator", c(Event:Count), remove = FALSE ) #gives each cycle a unique identifier in the graph
+#             
+#               #graphing
+#               
+#               hz<-ggplot(Hip_Z, aes(x=as.integer(Cycle), y=as.double(Value), color = Event, group=Seperator))  +
+#               geom_line()+
+#               guides(color =guide_legend(title="Event"))+
+#               ggtitle("Hips_Z")
+#               hz
+#               
+#               
+# #Knees: 
+#               
+#               KNEE_X <- finalData %>%
+#                 filter (Subject %in% subGraph) %>%
+#                 filter (Event %in% c("A", "B","C","D", "E"))%>%
+#                 filter (Component %in% "X ")%>%
+#                 filter (Joint %in% c("LKNEE","RKNEE")) %>%
+#                 #filter(Count %in% c(" 1")) %>%
+#                 pivot_longer(cols=c(6:106), names_to = "Cycle", values_to = "Value") %>%
+#                 unite("Seperator", c(Event:Count), remove = FALSE ) #gives each cycle a unique identifier in the graph
+#               
+#               
+#               
+#               #graphing: 
+#               kx<-ggplot(KNEE_X, aes(x=as.integer(Cycle), y=as.double(Value), color = Event, group=Seperator))  +
+#                 geom_line()+
+#                 guides(color =guide_legend(title="Event"))+
+#                 ggtitle("KNEE_X")
+#               kx
+#               
+#               KNEE_Y <- finalData %>%
+#                 
+#                 filter (Subject %in% subGraph) %>%
+#                 filter (Event %in% c("A","B","C","D","E"))%>%
+#                 filter (Component %in% "Y ")%>%
+#                 filter (Joint %in% c("LKNEE","RKNEE")) %>%
+#                 #filter(Count %in% c(" 1")) %>%
+#                 pivot_longer(cols=c(6:106), names_to = "Cycle", values_to = "Value") %>%
+#                 unite("Seperator", c(Event:Count), remove = FALSE ) #gives each cycle a unique identifier in the graph
+#               
+#               #graphing
+#               ky<-ggplot(KNEE_Y, aes(x=as.integer(Cycle), y=as.double(Value), color = Event, group=Seperator))  +
+#                 geom_line()+
+#                 guides(color =guide_legend(title="Event")) +
+#                 ggtitle("KNEE_Y")
+#               ky
+#               
+#               KNEE_Z <- finalData %>%
+#                 filter (Subject %in% subGraph) %>%
+#                 filter (Event %in% c("A","B","C","D","E"))%>%
+#                 filter (Component %in% "Z ")%>%
+#                 filter (Joint %in% c("LKNEE","RKNEE")) %>%
+#                 #filter(Count %in% c(" 1")) %>%
+#                 pivot_longer(cols=c(6:106), names_to = "Cycle", values_to = "Value") %>%
+#                 unite("Seperator", c(Event:Count), remove = FALSE ) #gives each cycle a unique identifier in the graph
+#               
+#               #graphing
+#               
+#               kz<-ggplot(KNEE_Z, aes(x=as.integer(Cycle), y=as.double(Value), color = Event, group=Seperator))  +
+#                 geom_line()+
+#                 guides(color =guide_legend(title="Event"))+
+#                 ggtitle("KNEE_Z")
+#               kz
+# # Ankle:               
+#               
+#               Ankle_X <- finalData %>%
+#                 filter (Subject %in% subGraph) %>%
+#                 filter (Event %in% c("A", "B","C","D", "E"))%>%
+#                 filter (Component %in% "X ")%>%
+#                 filter (Joint %in% c("LANKLE","RANKLE")) %>%
+#                 #filter(Count %in% c(" 1")) %>%
+#                 pivot_longer(cols=c(6:106), names_to = "Cycle", values_to = "Value") %>%
+#                 unite("Seperator", c(Event:Count), remove = FALSE ) #gives each cycle a unique identifier in the graph
+#               
+#               
+#               
+#               #graphing: 
+#               ax<-ggplot(Ankle_X, aes(x=as.integer(Cycle), y=as.double(Value), color = Event, group=Seperator))  +
+#                 geom_line()+
+#                 guides(color =guide_legend(title="Event"))+
+#                 ggtitle("Ankle_X")
+#               ax
+#               
+#               Ankle_Y <- finalData %>%
+#                 
+#                 filter (Subject %in% subGraph) %>%
+#                 filter (Event %in% c("A","B","C","D","E"))%>%
+#                 filter (Component %in% "Y ")%>%
+#                 filter (Joint %in% c("LANKLE","RANKLE")) %>%
+#                 #filter(Count %in% c(" 1")) %>%
+#                 pivot_longer(cols=c(6:106), names_to = "Cycle", values_to = "Value") %>%
+#                 unite("Seperator", c(Event:Count), remove = FALSE ) #gives each cycle a unique identifier in the graph
+#               
+#               #graphing
+#               ay<-ggplot(Ankle_Y, aes(x=as.integer(Cycle), y=as.double(Value), color = Event, group=Seperator))  +
+#                 geom_line()+
+#                 guides(color =guide_legend(title="Event")) +
+#                 ggtitle("Ankle_Y")
+#               ay
+#               
+#               Ankle_Z <- finalData %>%
+#                 filter (Subject %in% subGraph) %>%
+#                 filter (Event %in% c("A","B","C","D","E"))%>%
+#                 filter (Component %in% "Z ")%>%
+#                 filter (Joint %in% c("LANKLE","RANKLE")) %>%
+#                 #filter(Count %in% c(" 1")) %>%
+#                 pivot_longer(cols=c(6:106), names_to = "Cycle", values_to = "Value") %>%
+#                 unite("Seperator", c(Event:Count), remove = FALSE ) #gives each cycle a unique identifier in the graph
+#               
+#               #graphing
+#               
+#               az<-ggplot(Ankle_Z, aes(x=as.integer(Cycle), y=as.double(Value), color = Event, group=Seperator))  +
+#                 geom_line()+
+#                 guides(color =guide_legend(title="Event"))+
+#                 ggtitle("Ankle_Z")
+#               az
+# 
+#               
+#               ggarrange(hx,hy,hz,kx,ky,kz,ax,ay,az,ncol = 3, nrow = 3)
+#           
+#               
+#               write.table(finalData, file = "finalData.txt", sep="\t", row.names = TRUE , col.names = NA)
+# 
+#               
+#
+  
+  
+
+   
+   
+   
+   

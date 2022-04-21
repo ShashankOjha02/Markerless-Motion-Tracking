@@ -1,0 +1,167 @@
+  
+   
+#-------------------------------------------------------------------------------------------------- Code for Range of Motion ----------------------------------------------------------------------------------------------------------------
+#    
+# RoM <- function()  { #function that finds the standard deviation and the mean of any body part and component from the final data table given that you provide the bodypart names and component prior to calling upon the function
+# 
+# 
+#                                    #mean finder:
+#                                    #Deviation Table:
+#                                        Row<- finalData %>%
+#                                        #filter (Subject %in% subGraph) %>%
+#                                        filter (Component %in% Comp) %>%
+#                                        filter (Joint %in% c(Body1,Body2)) %>%
+#                                        unite("Seperator", c(Event:Count), remove = FALSE ) #gives each cycle a unique identifier in the graph
+#                                        i<-0
+#                                        Row2<-Row[,-c(8:107)]
+#                                         
+#                                        while(i< nrow(Row)) {
+#                                           i=i+1
+#                                           mx<-max(Row[i,c(7:107)])
+#                                           mn<-min(Row[i,c(7:107)])
+#                                           rang<-mx-mn
+#                                           
+#                                           Row2[i,7]<-rang
+#                                        }
+#                                        
+#                                        names(Row2)[7] <- paste("Value")  
+#                                        
+#                                        
+#                                        
+#                                         
+#            return(Row2)
+#  }
+#    # sub4<-subject('S00004')
+#    # sub6<-subject('S00006')
+#    # sub8<-subject('S00008')
+#    # sub14<-subject('S00014')
+#    # sub16 <-subject('S00016')
+#    # sub18<-subject('S00018')
+#    # sub19<-subject('S00019')
+#    # sub20<-subject('S00020')
+#    # sub26<-subject('S00026')
+#    # sub27<-subject('S00027')
+#    # sub33<-subject('S00033')
+# subGraph<-"S00026"
+#    
+# 
+#       
+#                                                                                             #code for box plot graphing: 
+#    
+# #See if you can wiggle the points to the side 
+# #Seperating the points by color   
+# Body1 <- "LHIP"
+# Body2 <- "RHIP"
+# Comp <- "X "
+# Hip_Romx <- RoM()
+# hx<-ggplot(data=Hip_Romx, aes(x=Event))+
+#   scale_y_continuous(name="Stopping distance", limits=c(0, 75))+
+#   geom_boxplot(aes(y=Value))+
+#   geom_point(aes(y=Value, color=Subject, group=Subject) , position = position_dodge(width=0.85))+
+#   labs(title=paste("HIP_X"))
+# hx
+# 
+# Body1 <- "LHIP"
+# Body2 <- "RHIP"
+# Comp <- "Y "
+# Hip_Romy <- RoM()
+# hy<-ggplot(data=Hip_Romy, aes(x=Event))+
+#   scale_y_continuous(name="Stopping distance", limits=c(0, 75))+
+#   geom_boxplot(aes(y=Value))+
+#   geom_point(aes(y=Value, color=Subject, group=Subject) , position = position_dodge(width=0.85))+
+#   labs(title=paste("HIP_Y"))
+# hy
+# 
+# 
+# 
+# Body1 <- "LHIP"
+# Body2 <- "RHIP"
+# Comp <- "Z "
+# Hip_Romz <- RoM()
+# hz<-ggplot(data=Hip_Romz, aes(x=Event))+
+#   scale_y_continuous(name="Stopping distance", limits=c(0, 75))+
+#   geom_boxplot(aes(y=Value))+
+#   geom_point(aes(y=Value, color=Subject, group=Subject) , position = position_dodge(width=0.85))+
+#   labs(title=paste("HIP_Z"))
+# hz
+# 
+# 
+# 
+# Body1 <- "LKNEE"
+# Body2 <- "RKNEE"
+# Comp <- "X "
+# Knee_Romx <- RoM()
+# kx<-ggplot(data=Knee_Romx, aes(x=Event))+
+#   scale_y_continuous(name="Stopping distance", limits=c(0, 75))+
+#   geom_boxplot(aes(y=Value))+
+#   geom_point(aes(y=Value, color=Subject, group=Subject) , position = position_dodge(width=0.85))+
+#   labs(title=paste("KNEE_X"))
+# kx
+# 
+# Body1 <- "LKNEE"
+# Body2 <- "RKNEE"
+# Comp <- "Y "
+# Knee_Romy <- RoM()
+# ky<-ggplot(data=Knee_Romy, aes(x=Event))+
+#   scale_y_continuous(name="Stopping distance", limits=c(0, 75))+
+#   geom_boxplot(aes(y=Value))+
+#   geom_point(aes(y=Value, color=Subject, group=Subject) , position = position_dodge(width=0.85))+
+#   labs(title=paste("KNEE_Y"))
+# ky
+# 
+# 
+# 
+# Body1 <- "LKNEE"
+# Body2 <- "RKNEE"
+# Comp <- "Z "
+# Knee_Romz <- RoM()
+# kz<-ggplot(data=Knee_Romz, aes(x=Event))+
+#   scale_y_continuous(name="Stopping distance", limits=c(0, 75))+
+#   geom_boxplot(aes(y=Value))+
+#   geom_point(aes(y=Value, color=Subject, group=Subject) , position = position_dodge(width=0.85))+
+#   labs(title=paste("KNEE_Z"))
+# kz
+# 
+# 
+# 
+# 
+# 
+# Body1 <- "LANKLE"
+# Body2 <- "RANKLE"
+# Comp <- "X "
+# Ankle_Romx <- RoM()
+# ax<-ggplot(data=Ankle_Romx, aes(x=Event))+
+#   scale_y_continuous(name="Stopping distance", limits=c(0, 75))+
+#   geom_boxplot(aes(y=Value))+
+#   geom_point(aes(y=Value, color=Subject, group=Subject) , position = position_dodge(width=0.85))+
+#   labs(title=paste("ANKLE_X"))
+# ax
+# 
+# Body1 <- "LANKLE"
+# Body2 <- "RANKLE"
+# Comp <- "Y "
+# Ankle_Romy <- RoM()
+# ay<-ggplot(data=Ankle_Romy, aes(x=Event))+
+#   scale_y_continuous(name="Stopping distance", limits=c(0, 75))+
+#   geom_boxplot(aes(y=Value))+
+#   geom_point(aes(y=Value, color=Subject, group=Subject) , position = position_dodge(width=0.85))+
+#   labs(title=paste("ANKLE_Y"))
+# ay
+# 
+# 
+# 
+# Body1 <- "LANKLE"
+# Body2 <- "RANKLE"
+# Comp <- "Z "
+# Ankle_Romz <- RoM()
+# az<-ggplot(data=Ankle_Romz, aes(x=Event))+
+#   scale_y_continuous(name="Stopping distance", limits=c(0, 75))+
+#   geom_boxplot(aes(y=Value))+
+#   geom_point(aes(y=Value, color=Subject, group=Subject) , position = position_dodge(width=0.85))+
+#   labs(title=paste("ANKLE_Z"))
+# az
+# 
+# 
+# 
+# ggarrange(hx,hy,hz,kx,ky,kz,ax,ay,az,ncol = 3, nrow = 3)         
+   

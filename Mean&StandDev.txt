@@ -1,0 +1,358 @@
+  
+   
+  #-------------------------------------------------------------------------------------------------------------Code for Mean and Standard Deviation:-------------------------------------------------------------------------------------------------------------------------------
+   
+  #  
+  #  
+  #   
+  # MeanDevTab <- function()  { #function that finds the standard deviation and the mean of any body part and component from the final data table given that you provide the bodypart names and component prior to calling upon the function 
+  #  
+  #                      
+  #                                   #mean finder:
+  #                                   #Deviation Table: 
+  #                                       Mean_A<- finalData %>%
+  #                                       filter (Subject %in% subGraph) %>%
+  #                                       filter (Event %in% c("A"))%>%
+  #                                       filter (Component %in% Comp) %>%
+  #                                       filter (Joint %in% c(Body1,Body2)) 
+  # 
+  #                                       #mean finder:
+  #                                       #Deviation Table: 
+  #                                       Mean_B<- finalData %>%
+  #                                         filter (Subject %in% subGraph) %>%
+  #                                         filter (Event %in% c("B"))%>%
+  #                                         filter (Component %in% Comp) %>%
+  #                                         filter (Joint %in% c(Body1,Body2)) 
+  #                                       
+  #                                       #mean finder:
+  #                                       #Deviation Table: 
+  #                                       Mean_C<- finalData %>%
+  #                                         filter (Subject %in% subGraph) %>%
+  #                                         filter (Event %in% c("C"))%>%
+  #                                         filter (Component %in% Comp) %>%
+  #                                         filter (Joint %in% c(Body1,Body2)) 
+  #                                       
+  #                                       #mean finder:
+  #                                       #Deviation Table: 
+  #                                       Mean_D<- finalData %>%
+  #                                         filter (Subject %in% subGraph) %>%
+  #                                         filter (Event %in% c("D"))%>%
+  #                                         filter (Component %in% Comp) %>%
+  #                                         filter (Joint %in% c(Body1,Body2)) 
+  #                                       
+  #                                       #mean finder:
+  #                                       #Deviation Table: 
+  #                                       Mean_E<- finalData %>%
+  #                                         filter (Subject %in% subGraph) %>%
+  #                                         filter (Event %in% c("E"))%>%
+  #                                         filter (Component %in% Comp) %>%
+  #                                         filter (Joint %in% c(Body1,Body2)) 
+  #                                       
+  #                                       
+  # 
+  #                 tableAdder <- function(binder) {                                      
+  #                                     Mean_Tab <- function(Meanss) {                                      
+  #                                             Mean_Table=data.frame(colMeans(Meanss[,c(6:106)]))
+  #                                             names(Mean_Table)[1] <- paste("A")  
+  #                                             return(Mean_Table)
+  #                                     }
+  #                                     
+  #                                     
+  #                                     
+  #                                     
+  #                                     devGen <- function(name) {
+  #                                       Dev <- subset(name, select = -c(1:5) )         
+  #                                       test<-(apply(Dev, 2, sd)) 
+  #                                       Dev<-data.frame(test) #finds stndard deviation for all the mean values
+  #                                       return(Dev)
+  #                                     }
+  #                                     
+  #                                     
+  #                                     Dev_A<-devGen(Mean_A)
+  #                                     Dev_B<-devGen(Mean_B)
+  #                                     Dev_C<-devGen(Mean_C)
+  #                                     Dev_D<-devGen(Mean_D)
+  #                                     Dev_E<-devGen(Mean_E)
+  #                                     
+  #                                     
+  #                                     
+  #                                     
+  #                                     Mean_Tab_A <- Mean_Tab(Mean_A)
+  #                                     Mean_Tab_B <- Mean_Tab(Mean_B)
+  #                                     Mean_Tab_C <- Mean_Tab(Mean_C)
+  #                                     Mean_Tab_D <- Mean_Tab(Mean_D)
+  #                                     Mean_Tab_E <- Mean_Tab(Mean_E)
+  #                                       
+  #                                     binder <- bind_cols(Mean_Tab_A, Mean_Tab_B, Mean_Tab_C, Mean_Tab_D, Mean_Tab_E, Dev_A, Dev_B, Dev_C, Dev_D, Dev_E)
+  #                                     names(binder)[1] <- paste("A")
+  #                                     names(binder)[2] <- paste("B")
+  #                                     names(binder)[3] <- paste("C")
+  #                                     names(binder)[4] <- paste("D")
+  #                                     names(binder)[5] <- paste("E")
+  #                                     names(binder)[6] <- paste("Dev_A")
+  #                                     names(binder)[7] <- paste("Dev_B")
+  #                                     names(binder)[8] <- paste("Dev_C")
+  #                                     names(binder)[9] <- paste("Dev_D")
+  #                                     names(binder)[10] <- paste("Dev_E")
+  #                                     
+  #                                     
+  #                                    cycle<-1:101
+  #                                    binder <- cbind(binder, new_col=cycle)
+  #                                    names(binder)[11] <- paste("Cycle")
+  #                                    binder <- binder[ , c("Cycle",    # Reorder data frame
+  #                                                           names(binder)[names(binder) != "Cycle"])]
+  #                                    binder                      # Print updated data frame
+  #                                     
+  #                 return(binder)
+  #                                                         
+  #                 }      
+  # 
+  #                 
+  #                 
+  #                 
+  # 
+  #           
+  #       finalMean <- tableAdder()  
+  #       
+  #       return(finalMean)
+  #       
+  # }       
+  # 
+  # 
+  # 
+  # 
+  # 
+  # #for graphing
+  # 
+  #       #to summon the component and body part you want to look at     
+  #       subGraph <- "S00033"
+  #       
+  #       
+  #       
+  #       Body1 <- "LHIP"
+  #       Body2 <- "RHIP"
+  #       Comp <- "X "
+  #       Dev_Hip_X<-MeanDevTab()
+  # 
+  #       colors <- c("A" = "red", "B" = "darkblue", "C" = "darkgreen", "D" = "yellow", "E" = "#8600e2")
+  #       hx<-ggplot(data=Dev_Hip_X, aes(x = Cycle))+
+  #           geom_ribbon(aes(ymin=A-Dev_A, ymax = Dev_A+A), fill = "#fd4562", alpha=0.4)+ #red
+  #           geom_ribbon(aes(ymin=B-Dev_B, ymax = Dev_B+B), fill = "#c9eefc", alpha=0.6)+ #blue
+  #           geom_ribbon(aes(ymin=C-Dev_C, ymax = Dev_C+C), fill = "#addfb5", alpha=0.6)+ #green
+  #           geom_ribbon(aes(ymin=D-Dev_D, ymax = Dev_D+D), fill = "#f0f8aa", alpha=0.6)+ #yellow
+  #           geom_ribbon(aes(ymin=E-Dev_E, ymax = Dev_E+E), fill = "#d76dff", alpha=0.3)+ #purple
+  #           geom_line(aes( y=A, color = "A"), lwd =2)+
+  #           geom_line(aes( y=B , color = "B") , lwd =2)+
+  #           geom_line(aes(y=C , color = "C"), lwd =2)+
+  #           geom_line(aes( y=D , color = "D"), lwd =2)+
+  #           geom_line( aes( y=E, color = "E"), lwd =2)+ #PURPLE
+  #           # Using a manual scale instead of hue
+  #           labs(title=paste(subGraph,"-Hip_X"), x="Cycle", y="Angle", color = "Event")+
+  #           scale_color_manual(values = colors)
+  #       hx  
+  #       
+  #       
+  #       
+  #       Body1 <- "LHIP"
+  #       Body2 <- "RHIP"
+  #       Comp <- "Y "
+  #       Dev_Hip_Y<-MeanDevTab()
+  #       
+  #       colors <- c("A" = "red", "B" = "darkblue", "C" = "darkgreen", "D" = "yellow", "E" = "#8600e2")
+  #       hy<-ggplot(data=Dev_Hip_Y, aes(x = Cycle))+
+  #         geom_ribbon(aes(ymin=A-Dev_A, ymax = Dev_A+A), fill = "#fd4562", alpha=0.4)+ #red
+  #         geom_ribbon(aes(ymin=B-Dev_B, ymax = Dev_B+B), fill = "#c9eefc", alpha=0.6)+ #blue
+  #         geom_ribbon(aes(ymin=C-Dev_C, ymax = Dev_C+C), fill = "#addfb5", alpha=0.6)+ #green
+  #         geom_ribbon(aes(ymin=D-Dev_D, ymax = Dev_D+D), fill = "#f0f8aa", alpha=0.6)+ #yellow
+  #         geom_ribbon(aes(ymin=E-Dev_E, ymax = Dev_E+E), fill = "#d76dff", alpha=0.3)+ #purple
+  #         geom_line(aes( y=A, color = "A"), lwd =2)+
+  #         geom_line(aes( y=B , color = "B") , lwd =2)+
+  #         geom_line(aes(y=C , color = "C"), lwd =2)+
+  #         geom_line(aes( y=D , color = "D"), lwd =2)+
+  #         geom_line( aes( y=E, color = "E"), lwd =2)+ #PURPLE
+  #         # Using a manual scale instead of hue
+  #         labs(title=paste("Hip_Y"), x="Cycle", y="Angle", color = "Event")+
+  #         scale_color_manual(values = colors)
+  #       hy  
+  #       
+  #       
+  #       
+  #       
+  #       Body1 <- "LHIP"
+  #       Body2 <- "RHIP"
+  #       Comp <- "Z "
+  #       Dev_Hip_Z<-MeanDevTab()
+  #       
+  #       colors <- c("A" = "red", "B" = "darkblue", "C" = "darkgreen", "D" = "yellow", "E" = "#8600e2")
+  #       hz<-ggplot(data=Dev_Hip_Z, aes(x = Cycle))+
+  #         geom_ribbon(aes(ymin=A-Dev_A, ymax = Dev_A+A), fill = "#fd4562", alpha=0.4)+ #red
+  #         geom_ribbon(aes(ymin=B-Dev_B, ymax = Dev_B+B), fill = "#c9eefc", alpha=0.6)+ #blue
+  #         geom_ribbon(aes(ymin=C-Dev_C, ymax = Dev_C+C), fill = "#addfb5", alpha=0.6)+ #green
+  #         geom_ribbon(aes(ymin=D-Dev_D, ymax = Dev_D+D), fill = "#f0f8aa", alpha=0.6)+ #yellow
+  #         geom_ribbon(aes(ymin=E-Dev_E, ymax = Dev_E+E), fill = "#d76dff", alpha=0.3)+ #purple
+  #         geom_line(aes( y=A, color = "A"), lwd =2)+
+  #         geom_line(aes( y=B , color = "B") , lwd =2)+
+  #         geom_line(aes(y=C , color = "C"), lwd =2)+
+  #         geom_line(aes( y=D , color = "D"), lwd =2)+
+  #         geom_line( aes( y=E, color = "E"), lwd =2)+ #PURPLE
+  #         # Using a manual scale instead of hue
+  #         labs(title=paste("Hip_Z"), x="Cycle", y="Angle", color = "Event")+
+  #         scale_color_manual(values = colors)
+  #       hz
+  #       
+  #       
+  #       
+  #       
+  #       Body1 <- "LKNEE"
+  #       Body2 <- "RKNEE"
+  #       Comp <- "X "
+  #       Dev_Knee_X<-MeanDevTab()
+  #       
+  #       colors <- c("A" = "red", "B" = "darkblue", "C" = "darkgreen", "D" = "yellow", "E" = "#8600e2")
+  #       kx<-ggplot(data=Dev_Knee_X, aes(x = Cycle))+
+  #         geom_ribbon(aes(ymin=A-Dev_A, ymax = Dev_A+A), fill = "#fd4562", alpha=0.4)+ #red
+  #         geom_ribbon(aes(ymin=B-Dev_B, ymax = Dev_B+B), fill = "#c9eefc", alpha=0.6)+ #blue
+  #         geom_ribbon(aes(ymin=C-Dev_C, ymax = Dev_C+C), fill = "#addfb5", alpha=0.6)+ #green
+  #         geom_ribbon(aes(ymin=D-Dev_D, ymax = Dev_D+D), fill = "#f0f8aa", alpha=0.6)+ #yellow
+  #         geom_ribbon(aes(ymin=E-Dev_E, ymax = Dev_E+E), fill = "#d76dff", alpha=0.3)+ #purple
+  #         geom_line(aes( y=A, color = "A"), lwd =2)+
+  #         geom_line(aes( y=B , color = "B") , lwd =2)+
+  #         geom_line(aes(y=C , color = "C"), lwd =2)+
+  #         geom_line(aes( y=D , color = "D"), lwd =2)+
+  #         geom_line( aes( y=E, color = "E"), lwd =2)+ #PURPLE
+  #         # Using a manual scale instead of hue
+  #         labs(title=paste("Knee_X"), x="Cycle", y="Angle", color = "Event")+
+  #         scale_color_manual(values = colors)
+  #       kx  
+  #       
+  #       
+  #       Body1 <- "LKNEE"
+  #       Body2 <- "RKNEE"
+  #       Comp <- "Y "
+  #       Dev_Knee_Y<-MeanDevTab()
+  #       
+  #       colors <- c("A" = "red", "B" = "darkblue", "C" = "darkgreen", "D" = "yellow", "E" = "#8600e2")
+  #       ky<-ggplot(data=Dev_Knee_Y, aes(x = Cycle))+
+  #         geom_ribbon(aes(ymin=A-Dev_A, ymax = Dev_A+A), fill = "#fd4562", alpha=0.4)+ #red
+  #         geom_ribbon(aes(ymin=B-Dev_B, ymax = Dev_B+B), fill = "#c9eefc", alpha=0.6)+ #blue
+  #         geom_ribbon(aes(ymin=C-Dev_C, ymax = Dev_C+C), fill = "#addfb5", alpha=0.6)+ #green
+  #         geom_ribbon(aes(ymin=D-Dev_D, ymax = Dev_D+D), fill = "#f0f8aa", alpha=0.6)+ #yellow
+  #         geom_ribbon(aes(ymin=E-Dev_E, ymax = Dev_E+E), fill = "#d76dff", alpha=0.3)+ #purple
+  #         geom_line(aes( y=A, color = "A"), lwd =2)+
+  #         geom_line(aes( y=B , color = "B") , lwd =2)+
+  #         geom_line(aes(y=C , color = "C"), lwd =2)+
+  #         geom_line(aes( y=D , color = "D"), lwd =2)+
+  #         geom_line( aes( y=E, color = "E"), lwd =2)+ #PURPLE
+  #         # Using a manual scale instead of hue
+  #         labs(title=paste("Knee_Y"), x="Cycle", y="Angle", color = "Event")+
+  #         scale_color_manual(values = colors)
+  #       ky
+  #       
+  #       
+  #       
+  #       Body1 <- "LKNEE"
+  #       Body2 <- "RKNEE"
+  #       Comp <- "Z "
+  #       Dev_Knee_Z<-MeanDevTab()
+  #       
+  #       colors <- c("A" = "red", "B" = "darkblue", "C" = "darkgreen", "D" = "yellow", "E" = "#8600e2")
+  #       kz<-ggplot(data=Dev_Knee_Z, aes(x = Cycle))+
+  #         geom_ribbon(aes(ymin=A-Dev_A, ymax = Dev_A+A), fill = "#fd4562", alpha=0.4)+ #red
+  #         geom_ribbon(aes(ymin=B-Dev_B, ymax = Dev_B+B), fill = "#c9eefc", alpha=0.6)+ #blue
+  #         geom_ribbon(aes(ymin=C-Dev_C, ymax = Dev_C+C), fill = "#addfb5", alpha=0.6)+ #green
+  #         geom_ribbon(aes(ymin=D-Dev_D, ymax = Dev_D+D), fill = "#f0f8aa", alpha=0.6)+ #yellow
+  #         geom_ribbon(aes(ymin=E-Dev_E, ymax = Dev_E+E), fill = "#d76dff", alpha=0.3)+ #purple
+  #         geom_line(aes( y=A, color = "A"), lwd =2)+
+  #         geom_line(aes( y=B , color = "B") , lwd =2)+
+  #         geom_line(aes(y=C , color = "C"), lwd =2)+
+  #         geom_line(aes( y=D , color = "D"), lwd =2)+
+  #         geom_line( aes( y=E, color = "E"), lwd =2)+ #PURPLE
+  #         # Using a manual scale instead of hue
+  #         labs(title=paste("Knee_Z"), x="Cycle", y="Angle", color = "Event")+
+  #         scale_color_manual(values = colors)
+  #       kz  
+  #       
+  #       
+  #       
+  #       
+  #       
+  #       
+  #       Body1 <- "LANKLE"
+  #       Body2 <- "RANKLE"
+  #       Comp <- "X "
+  #       Dev_Ankle_X<-MeanDevTab()
+  #       
+  #       colors <- c("A" = "red", "B" = "darkblue", "C" = "darkgreen", "D" = "yellow", "E" = "#8600e2")
+  #       ax<-ggplot(data=Dev_Ankle_X, aes(x = Cycle))+
+  #         geom_ribbon(aes(ymin=A-Dev_A, ymax = Dev_A+A), fill = "#fd4562", alpha=0.4)+ #red
+  #         geom_ribbon(aes(ymin=B-Dev_B, ymax = Dev_B+B), fill = "#c9eefc", alpha=0.6)+ #blue
+  #         geom_ribbon(aes(ymin=C-Dev_C, ymax = Dev_C+C), fill = "#addfb5", alpha=0.6)+ #green
+  #         geom_ribbon(aes(ymin=D-Dev_D, ymax = Dev_D+D), fill = "#f0f8aa", alpha=0.6)+ #yellow
+  #         geom_ribbon(aes(ymin=E-Dev_E, ymax = Dev_E+E), fill = "#d76dff", alpha=0.3)+ #purple
+  #         geom_line(aes( y=A, color = "A"), lwd =2)+
+  #         geom_line(aes( y=B , color = "B") , lwd =2)+
+  #         geom_line(aes(y=C , color = "C"), lwd =2)+
+  #         geom_line(aes( y=D , color = "D"), lwd =2)+
+  #         geom_line( aes( y=E, color = "E"), lwd =2)+ #PURPLE
+  #         # Using a manual scale instead of hue
+  #         labs(title=paste("Ankle_X"), x="Cycle", y="Angle", color = "Event")+
+  #         scale_color_manual(values = colors)
+  #       ax  
+  #       
+  #       
+  #       
+  #       Body1 <- "LANKLE"
+  #       Body2 <- "RANKLE"
+  #       Comp <- "Y "
+  #       Dev_Ankle_Y<-MeanDevTab()
+  #       
+  #       colors <- c("A" = "red", "B" = "darkblue", "C" = "darkgreen", "D" = "yellow", "E" = "#8600e2")
+  #       ay<-ggplot(data=Dev_Ankle_Y, aes(x = Cycle))+
+  #         geom_ribbon(aes(ymin=A-Dev_A, ymax = Dev_A+A), fill = "#fd4562", alpha=0.4)+ #red
+  #         geom_ribbon(aes(ymin=B-Dev_B, ymax = Dev_B+B), fill = "#c9eefc", alpha=0.6)+ #blue
+  #         geom_ribbon(aes(ymin=C-Dev_C, ymax = Dev_C+C), fill = "#addfb5", alpha=0.6)+ #green
+  #         geom_ribbon(aes(ymin=D-Dev_D, ymax = Dev_D+D), fill = "#f0f8aa", alpha=0.6)+ #yellow
+  #         geom_ribbon(aes(ymin=E-Dev_E, ymax = Dev_E+E), fill = "#d76dff", alpha=0.3)+ #purple
+  #         geom_line(aes( y=A, color = "A"), lwd =2)+
+  #         geom_line(aes( y=B , color = "B") , lwd =2)+
+  #         geom_line(aes(y=C , color = "C"), lwd =2)+
+  #         geom_line(aes( y=D , color = "D"), lwd =2)+
+  #         geom_line( aes( y=E, color = "E"), lwd =2)+ #PURPLE
+  #         # Using a manual scale instead of hue
+  #         labs(title=paste("Ankle_Y"), x="Cycle", y="Angle", color = "Event")+
+  #         scale_color_manual(values = colors)
+  #       ay  
+  #       
+  #       
+  #       
+  #       Body1 <- "LANKLE"
+  #       Body2 <- "RANKLE"
+  #       Comp <- "Z "
+  #       Dev_Ankle_Z<-MeanDevTab()
+  #       
+  #       colors <- c("A" = "red", "B" = "darkblue", "C" = "darkgreen", "D" = "yellow", "E" = "#8600e2")
+  #       az<-ggplot(data=Dev_Ankle_Z, aes(x = Cycle))+
+  #         geom_ribbon(aes(ymin=A-Dev_A, ymax = Dev_A+A), fill = "#fd4562", alpha=0.4)+ #red
+  #         geom_ribbon(aes(ymin=B-Dev_B, ymax = Dev_B+B), fill = "#c9eefc", alpha=0.6)+ #blue
+  #         geom_ribbon(aes(ymin=C-Dev_C, ymax = Dev_C+C), fill = "#addfb5", alpha=0.6)+ #green
+  #         geom_ribbon(aes(ymin=D-Dev_D, ymax = Dev_D+D), fill = "#f0f8aa", alpha=0.6)+ #yellow
+  #         geom_ribbon(aes(ymin=E-Dev_E, ymax = Dev_E+E), fill = "#d76dff", alpha=0.3)+ #purple
+  #         geom_line(aes( y=A, color = "A"), lwd =2)+
+  #         geom_line(aes( y=B , color = "B") , lwd =2)+
+  #         geom_line(aes(y=C , color = "C"), lwd =2)+
+  #         geom_line(aes( y=D , color = "D"), lwd =2)+
+  #         geom_line( aes( y=E, color = "E"), lwd =2)+ #PURPLE
+  #         # Using a manual scale instead of hue
+  #         labs(title=paste("Ankle_Z"), x="Cycle", y="Angle", color = "Event")+
+  #         scale_color_manual(values = colors)
+  #       az  
+  #       
+  #       
+  #       
+  #       
+  #   
+  #       
+  #       
+  #       ggarrange(hx,hy,hz,kx,ky,kz,ax,ay,az,ncol = 3, nrow = 3)                                
+  
+   

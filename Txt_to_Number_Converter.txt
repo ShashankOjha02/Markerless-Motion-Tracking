@@ -1,0 +1,20 @@
+#function that converts strings to numbers 
+  numbconverter = function(val) {
+          counter = 6
+          while (counter <= 106) {
+            list=1
+            #values from column: 
+            deviVals<-as.numeric(unlist(val[c(counter)])) #goes through every column extracts them and then converts to int 
+            val<-replace(val, c(counter), deviVals )
+            #meanVals<-val(deviVals)
+            counter=counter+1
+            list=list+1
+          }
+          return(val) }
+          
+              
+   finalData <- numbconverter(finalData)           
+
+   subGraph <- "S00033"
+   
+    
