@@ -8,4 +8,5 @@ One of the questions that need to be answered about MOCAP is how camera angle an
 
 # Contents: 
 In the following study, you will find a full report I did on my findings, a walkthrough of the various technologies I used, aswell as sample of various data analytic methods I learned on the go to complete this in phyton. 
+Specifically, in the Report Star Trials _Final.pdf file, there is a full report on all the technologies used in the project as well as the results and conclusions that I found for the lab.
 
