@@ -1,6 +1,6 @@
 # Markerless-Motion-Tracking - Shashank Ojha 
 
-[[Full Report Can be Found Here](https://github.com/ShashankOjha02/Markerless-Motion-Tracking/tree/main)](https://github.com/ShashankOjha02/Markerless-Motion-Tracking/blob/main/Report%20Star%20Trials%20_Final.pdf)
+[FULL REPORT CAN BE FOUND HERE](https://github.com/ShashankOjha02/Markerless-Motion-Tracking/blob/main/Report%20Star%20Trials%20_Final.pdf)
 
 ![image](https://user-images.githubusercontent.com/73144685/164355040-1db8ae46-cca8-481e-ace6-c362bf9b36b6.png)
 
